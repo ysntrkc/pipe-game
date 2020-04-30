@@ -120,6 +120,7 @@ public class Main extends Application {
             closeProgram();
         });
 
+        window.getIcons().add(new Image("icons/window_icon.png"));
         window.setTitle("Game");
         window.setScene(start_scene);
         window.setResizable(false);
@@ -127,9 +128,11 @@ public class Main extends Application {
     }
 
     public void closeProgram() {
-        boolean answer = ConfirmBox.display("Exit", "Do you really want to close the game?");
-        if (answer)
+        int result = ConfirmBox.display("Exit", "Do you really want to close the game?");
+        if (result == 1)
             window.close();
+        else if(result == 0)
+            window.setScene(start_scene);
     }
 
     public void button_handler(String level, Tiles[] tiles_level) {
@@ -173,7 +176,7 @@ public class Main extends Application {
         if (level.equals(level1) || level.equals(level2) || level.equals(level3)) {
             Polyline path1 = new Polyline(48, 48, 48, 339, 339, 339);
             pathOne = new PathTransition();
-            pathOne.setDuration(Duration.millis(4000));
+            pathOne.setDuration(Duration.seconds(3));
             pathOne.setPath(path1);
             pathOne.setNode(circle);
             pathOne.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -182,7 +185,7 @@ public class Main extends Application {
         } else if (level.equals(level4) || level.equals(level5)) {
             Polyline path2 = new Polyline(48, 48, 48, 242, 339, 242, 339, 145);
             pathTwo = new PathTransition();
-            pathTwo.setDuration(Duration.millis(4000));
+            pathTwo.setDuration(Duration.seconds(3));
             pathTwo.setPath(path2);
             pathTwo.setNode(circle);
             pathTwo.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);

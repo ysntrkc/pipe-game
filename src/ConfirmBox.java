@@ -3,15 +3,17 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ConfirmBox {
-    static boolean answer;
+    private static int answer;
+    public static Button menuButton = new Button("Menu");
 
-    public static boolean display(String title, String message) {
+    public static int display(String title, String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
@@ -25,16 +27,20 @@ public class ConfirmBox {
         Button noButton = new Button("No");
 
         yesButton.setOnAction(e -> {
-            answer = true;
+            answer = 1;
             window.close();
         });
         noButton.setOnAction(e -> {
-            answer = false;
+            answer = -1;
+            window.close();
+        });
+        menuButton.setOnAction(e -> {
+            answer = 0;
             window.close();
         });
 
         HBox hBoxForButtons = new HBox(10);
-        hBoxForButtons.getChildren().addAll(yesButton, noButton);
+        hBoxForButtons.getChildren().addAll(yesButton, menuButton, noButton);
         hBoxForButtons.setAlignment(Pos.CENTER);
         hBoxForButtons.setPadding(new Insets(5, 5, 5, 5));
 
@@ -43,6 +49,7 @@ public class ConfirmBox {
         pane.setBottom(hBoxForButtons);
 
         Scene scene = new Scene(pane);
+        window.getIcons().add(new Image("icons/exit_icon.png"));
         window.setResizable(false);
         window.setScene(scene);
         window.showAndWait();
