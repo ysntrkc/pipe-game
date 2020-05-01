@@ -269,61 +269,57 @@ public class Main extends Application {
             pathTwo4.play();
             pathTwo5.play();
         }
+        System.out.println("Level is completed.");
     }
 
     public void move_cell(int cell_index, GridPane gridPane, Tiles[] tiles) {
         tiles[cell_index].getTile_image().setOnMouseDragged(e -> {
             if (tiles[cell_index].getType().equals("Pipe")
                     || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
-                if (e.getX() - tiles[cell_index].getTile_image().getX() > 96 && tiles[cell_index].can_move_right(cell_index, tiles)) {
-                    if (isWon(tiles)) {
-                        System.out.println("Level is already done!");
-                    } else {
+                if (e.getX() - tiles[cell_index].getTile_image().getX() > 96 && can_move_right(cell_index, tiles)) {
+                    if (!isWon(tiles)) {
                         GridPane.setColumnIndex(tiles[cell_index + 1].getTile_image(), GridPane.getColumnIndex(tiles[cell_index + 1].getTile_image()) - 1);
                         GridPane.setColumnIndex(tiles[cell_index].getTile_image(), GridPane.getColumnIndex(tiles[cell_index].getTile_image()) + 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index + 1];
+                        System.out.println(current.toString() + " moved to right.");
 
                         tiles[cell_index + 1] = current;
                         step_controller(cell_index, tiles, next);
                     }
-                } else if (e.getX() - tiles[cell_index].getTile_image().getX() < 0 && tiles[cell_index].can_move_left(cell_index, tiles)) {
-                    if (isWon(tiles)) {
-                        System.out.println("Level is already done!");
-                    } else {
+                } else if (e.getX() - tiles[cell_index].getTile_image().getX() < 0 && can_move_left(cell_index, tiles)) {
+                    if (!isWon(tiles)) {
                         GridPane.setColumnIndex(tiles[cell_index - 1].getTile_image(), GridPane.getColumnIndex(tiles[cell_index - 1].getTile_image()) + 1);
                         GridPane.setColumnIndex(tiles[cell_index].getTile_image(), GridPane.getColumnIndex(tiles[cell_index].getTile_image()) - 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index - 1];
+                        System.out.println(current.toString() + " moved to left.");
 
                         tiles[cell_index - 1] = current;
                         step_controller(cell_index, tiles, next);
                     }
-
-                } else if (e.getY() - tiles[cell_index].getTile_image().getY() > 96 && tiles[cell_index].can_move_down(cell_index, tiles)) {
-                    if (isWon(tiles)) {
-                        System.out.println("Level is already done!");
-                    } else {
+                } else if (e.getY() - tiles[cell_index].getTile_image().getY() > 96 && can_move_down(cell_index, tiles)) {
+                    if (!isWon(tiles)) {
                         GridPane.setRowIndex(tiles[cell_index + 4].getTile_image(), GridPane.getRowIndex(tiles[cell_index + 4].getTile_image()) - 1);
                         GridPane.setRowIndex(tiles[cell_index].getTile_image(), GridPane.getRowIndex(tiles[cell_index].getTile_image()) + 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index + 4];
+                        System.out.println(current.toString() + " moved to down.");
 
                         tiles[cell_index + 4] = current;
                         step_controller(cell_index, tiles, next);
                     }
-                } else if (e.getY() - tiles[cell_index].getTile_image().getY() < 0 && tiles[cell_index].can_move_up(cell_index, tiles)) {
-                    if (isWon(tiles)) {
-                        System.out.println("Level is already done!");
-                    } else {
+                } else if (e.getY() - tiles[cell_index].getTile_image().getY() < 0 && can_move_up(cell_index, tiles)) {
+                    if (!isWon(tiles)) {
                         GridPane.setRowIndex(tiles[cell_index - 4].getTile_image(), GridPane.getRowIndex(tiles[cell_index - 4].getTile_image()) + 1);
                         GridPane.setRowIndex(tiles[cell_index].getTile_image(), GridPane.getRowIndex(tiles[cell_index].getTile_image()) - 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index - 4];
+                        System.out.println(current.toString() + " moved to up.");
 
                         tiles[cell_index - 4] = current;
                         step_controller(cell_index, tiles, next);
@@ -453,7 +449,7 @@ public class Main extends Application {
             int j = (int) e.getY() / 96;
             int tile_index = i + 4 * j;
 
-            System.out.println(tile_index);
+            System.out.println("\nTile index: " + tile_index);
             System.out.println(tiles[tile_index].getTile_id() + ":" + tiles[tile_index].getType() + ":" + tiles[tile_index].getProperty());
 
             move_cell(tile_index, gridMap, tiles);
@@ -480,7 +476,6 @@ public class Main extends Application {
                             || current.getProperty().equals("11") && before.getProperty().equals("11")
                             || current.getProperty().equals("11") && before.getProperty().equals("00")) {
                         if (tiles[i + 4].getType().equals("End")) {
-                            System.out.println("You win");
                             return true;
                         } else if (tiles[i + 4].getProperty().equals("Vertical")
                                 || tiles[i + 4].getProperty().equals("00")
@@ -489,7 +484,6 @@ public class Main extends Application {
                             current = tiles[i + 4];
                             i += 4;
                         } else {
-                            System.out.println("Dead End");
                             return false;
                         }
                     } else if (current.getProperty().equals("Horizontal") && before.getProperty().equals("Horizontal")
@@ -500,7 +494,6 @@ public class Main extends Application {
                             || current.getProperty().equals("11") && before.getProperty().equals("Vertical")
                             || current.getProperty().equals("11") && before.getProperty().equals("01")) {
                         if (tiles[i + 1].getType().equals("End")) {
-                            System.out.println("You win");
                             return true;
                         } else if (tiles[i + 1].getProperty().equals("Horizontal")
                                 || tiles[i + 1].getProperty().equals("10")
@@ -509,7 +502,6 @@ public class Main extends Application {
                             current = tiles[i + 1];
                             i += 1;
                         } else {
-                            System.out.println("Dead End");
                             return false;
                         }
                     } else if (current.getProperty().equals("Vertical") && before.getProperty().equals("01")
@@ -521,7 +513,6 @@ public class Main extends Application {
                             || current.getProperty().equals("01") && before.getProperty().equals("01")
                             || current.getProperty().equals("01") && before.getProperty().equals("11")) {
                         if (tiles[i - 4].getType().equals("End")) {
-                            System.out.println("You win");
                             return true;
                         } else if (tiles[i - 4].getProperty().equals("Vertical")
                                 || tiles[i - 4].getProperty().equals("10")
@@ -530,7 +521,6 @@ public class Main extends Application {
                             current = tiles[i - 4];
                             i -= 4;
                         } else {
-                            System.out.println("Dead End");
                             return false;
                         }
                     } else if (current.getProperty().equals("Horizontal") && before.getProperty().equals("00")
@@ -538,7 +528,6 @@ public class Main extends Application {
                             || current.getProperty().equals("00") && before.getProperty().equals("Vertical")
                             || current.getProperty().equals("10") && before.getProperty().equals("Vertical")) {
                         if (tiles[i - 1].getType().equals("End")) {
-                            System.out.println("You win");
                             return true;
                         } else if (tiles[i - 1].getProperty().equals("Horizontal")
                                 || tiles[i - 1].getProperty().equals("01")
@@ -547,7 +536,6 @@ public class Main extends Application {
                             current = tiles[i - 1];
                             i -= 1;
                         } else {
-                            System.out.println("Dead End");
                             return false;
                         }
                     } else {
@@ -559,165 +547,43 @@ public class Main extends Application {
         return false;
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public boolean can_move_right(int cell_index, Tiles[] tiles) {
+        if (cell_index == 3 || cell_index == 7 || cell_index == 11 || cell_index == 15) {
+            return false;
+        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+            return tiles[cell_index + 1].getProperty().equals("Free");
+        }
+        return false;
     }
 
-    static class Tiles {
-        private ImageView tile_image;
-        private int tile_id;
-        private String type;
-        private String property;
-
-        Tiles(int tile_id, String type, String property) {
-            this.tile_id = tile_id;
-            this.type = type;
-            this.property = property;
-
-            switch (type) {
-                case "Starter":
-                    switch (property) {
-                        case "Horizontal":
-                            tile_image = new ImageView(new Image("tiles/start_horizontal.PNG"));
-                            break;
-                        case "Vertical":
-                            tile_image = new ImageView(new Image("tiles/start_vertical.PNG"));
-                            break;
-                    }
-                    break;
-                case "Empty":
-                    switch (property) {
-                        case "none":
-                            tile_image = new ImageView(new Image("tiles/empty.PNG"));
-                            break;
-                        case "Free":
-                            tile_image = new ImageView(new Image("tiles/empty_free.PNG"));
-                            break;
-                    }
-                    break;
-                case "Pipe":
-                    switch (property) {
-                        case "Vertical":
-                            tile_image = new ImageView(new Image("tiles/pipe_vertical.PNG"));
-                            break;
-                        case "Horizontal":
-                            tile_image = new ImageView(new Image("tiles/pipe_horizontal.PNG"));
-                            break;
-                        case "00":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_00.PNG"));
-                            break;
-                        case "01":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_01.PNG"));
-                            break;
-                        case "10":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_10.PNG"));
-                            break;
-                        case "11":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_11.PNG"));
-                            break;
-                    }
-                    break;
-                case "PipeStatic":
-                    switch (property) {
-                        case "Vertical":
-                            tile_image = new ImageView(new Image("tiles/pipe_static_vertical.PNG"));
-                            break;
-                        case "Horizontal":
-                            tile_image = new ImageView(new Image("tiles/pipe_static_horizontal.PNG"));
-                            break;
-                        case "00":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_static_00.PNG"));
-                            break;
-                        case "01":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_static_01.PNG"));
-                            break;
-                        case "10":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_static_10.PNG"));
-                            break;
-                        case "11":
-                            tile_image = new ImageView(new Image("tiles/curved_pipe_static_11.PNG"));
-                            break;
-                    }
-                    break;
-                case "End":
-                    switch (property) {
-                        case "Horizontal":
-                            tile_image = new ImageView(new Image("tiles/end_horizontal.PNG"));
-                            break;
-                        case "Vertical":
-                            tile_image = new ImageView(new Image("tiles/end_vertical.PNG"));
-                            break;
-                    }
-                    break;
-            }
-        }
-
-        public boolean can_move_right(int cell_index, Tiles[] tiles) {
-            if (cell_index == 3 || cell_index == 7 || cell_index == 11 || cell_index == 15) {
-                return false;
-            } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
-                return tiles[cell_index + 1].getProperty().equals("Free");
-            }
+    public boolean can_move_left(int cell_index, Tiles[] tiles) {
+        if (cell_index == 0 || cell_index == 4 || cell_index == 8 || cell_index == 12) {
             return false;
+        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+            return tiles[cell_index - 1].getProperty().equals("Free");
         }
+        return false;
+    }
 
-        public boolean can_move_left(int cell_index, Tiles[] tiles) {
-            if (cell_index == 0 || cell_index == 4 || cell_index == 8 || cell_index == 12) {
-                return false;
-            } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
-                return tiles[cell_index - 1].getProperty().equals("Free");
-            }
+    public boolean can_move_up(int cell_index, Tiles[] tiles) {
+        if (cell_index == 0 || cell_index == 1 || cell_index == 2 || cell_index == 3) {
             return false;
+        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+            return tiles[cell_index - 4].getProperty().equals("Free");
         }
+        return false;
+    }
 
-        public boolean can_move_up(int cell_index, Tiles[] tiles) {
-            if (cell_index == 0 || cell_index == 1 || cell_index == 2 || cell_index == 3) {
-                return false;
-            } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
-                return tiles[cell_index - 4].getProperty().equals("Free");
-            }
+    public boolean can_move_down(int cell_index, Tiles[] tiles) {
+        if (cell_index == 12 || cell_index == 13 || cell_index == 14 || cell_index == 15) {
             return false;
+        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+            return tiles[cell_index + 4].getProperty().equals("Free");
         }
+        return false;
+    }
 
-        public boolean can_move_down(int cell_index, Tiles[] tiles) {
-            if (cell_index == 12 || cell_index == 13 || cell_index == 14 || cell_index == 15) {
-                return false;
-            } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
-                return tiles[cell_index + 4].getProperty().equals("Free");
-            }
-            return false;
-        }
-
-        public ImageView getTile_image() {
-            return tile_image;
-        }
-
-        public void setTile_image(ImageView tile_image) {
-            this.tile_image = tile_image;
-        }
-
-        public int getTile_id() {
-            return tile_id;
-        }
-
-        public void setTile_id(int tile_id) {
-            this.tile_id = tile_id;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getProperty() {
-            return property;
-        }
-
-        public void setProperty(String property) {
-            this.property = property;
-        }
+    public static void main(String[] args) {
+        launch(args);
     }
 }
