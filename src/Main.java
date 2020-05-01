@@ -11,11 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Main extends Application {
@@ -52,6 +54,7 @@ public class Main extends Application {
     VBox vBoxForButtons = new VBox(10);
     Button level1_button, level2_button, level3_button, level4_button, level5_button;
     Button start_button, credit_button, quit_button;
+    Button go_back_button = new Button("Back");
     Text step_counter_text = new Text("");
     Text total_counter_text = new Text("");
     Text win_text = new Text("");
@@ -101,6 +104,8 @@ public class Main extends Application {
         hBoxForButtons.setPadding(new Insets(2, 10, 2, 10));
         hBoxForButtons.getChildren().addAll(level1_button, level2_button, level3_button, level4_button, level5_button);
 
+
+
         start_button = new Button("Start");
         credit_button = new Button("Credits");
         quit_button = new Button("Quit");
@@ -112,6 +117,7 @@ public class Main extends Application {
         vBoxForButtons.getChildren().addAll(start_button, credit_button, quit_button);
 
         start_button.setOnAction(e -> button_handler(level1, tiles_level1));
+        credit_button.setOnAction(e -> credit_screen());
         quit_button.setOnAction(e -> closeProgram());
 
         start_pane.setStyle("-fx-background-color: #5e0000");
@@ -133,6 +139,64 @@ public class Main extends Application {
         window.setScene(start_scene);
         window.setResizable(false);
         window.show();
+    }
+
+    public void credit_screen() {
+        GridPane gridPaneForCredits = new GridPane();
+        gridPaneForCredits.setHgap(5);
+        gridPaneForCredits.setVgap(5);
+
+        Font fontBold = Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 20);
+        Font fontNormal = Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 20);
+        Font fontNormalSmall = Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15);
+
+        Text text1 = new Text("Programmers:");
+        Text text1_1 = new Text("Yasin Tarakçı");
+        Text text1_2 = new Text("Yusuf Taha Atalay");
+        Text text2 = new Text("Artist:");
+        Text text2_2 = new Text("Yusuf Taha Atalay");
+        Text text3 = new Text("Icons:");
+        Text text3_1 = new Text("https://www.iconfinder.com/");
+        Text text4 = new Text("Special Thanks:");
+        Text text4_1 = new Text("Aseprite for Pixel Art");
+        Text text4_2 = new Text("Intellij IDEA and JetBrains");
+        Text text4_3 = new Text("TabNine the best plugin");
+
+        text1.setFont(fontBold);
+        text2.setFont(fontBold);
+        text3.setFont(fontBold);
+        text4.setFont(fontBold);
+        text1_1.setFont(fontNormal);
+        text1_2.setFont(fontNormal);
+        text2_2.setFont(fontNormal);
+        text3_1.setFont(fontNormalSmall);
+        text4_1.setFont(fontNormalSmall);
+        text4_2.setFont(fontNormalSmall);
+        text4_3.setFont(fontNormalSmall);
+
+        gridPaneForCredits.add(text1, 0, 0);
+        gridPaneForCredits.add(text1_1, 1, 0);
+        gridPaneForCredits.add(text1_2, 1, 1);
+        gridPaneForCredits.add(new Text(""), 0, 2);
+        gridPaneForCredits.add(text2, 0, 3);
+        gridPaneForCredits.add(text2_2, 1, 3);
+        gridPaneForCredits.add(new Text(""), 0, 4);
+        gridPaneForCredits.add(text3, 0, 5);
+        gridPaneForCredits.add(text3_1, 1, 5);
+        gridPaneForCredits.add(new Text(""), 0, 7);
+        gridPaneForCredits.add(text4, 0, 8);
+        gridPaneForCredits.add(text4_1, 1, 8);
+        gridPaneForCredits.add(text4_2, 1, 9);
+        gridPaneForCredits.add(text4_3, 1, 10);
+
+        Pane credits_pane = new Pane(gridPaneForCredits, go_back_button);
+        credits_pane.setStyle("-fx-background-color: #0ea582");
+        gridPaneForCredits.relocate(10, 5);
+        go_back_button.relocate(145.5,325.5);
+        go_back_button.setPrefSize(96,48);
+        go_back_button.setOnAction(e -> window.setScene(start_scene));
+        Scene credits_scene = new Scene(credits_pane,387,434);
+        window.setScene(credits_scene);
     }
 
     public void closeProgram() {
