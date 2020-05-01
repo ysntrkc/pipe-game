@@ -104,8 +104,6 @@ public class Main extends Application {
         hBoxForButtons.setPadding(new Insets(2, 10, 2, 10));
         hBoxForButtons.getChildren().addAll(level1_button, level2_button, level3_button, level4_button, level5_button);
 
-
-
         start_button = new Button("Start");
         credit_button = new Button("Credits");
         quit_button = new Button("Quit");
