@@ -195,7 +195,7 @@ public class Main extends Application {
             pathOne1.setAutoReverse(false);
 
             pathOne2.setDuration(Duration.millis(time_for_tile));
-            pathOne2.setDelay(Duration.millis(time_for_tile * 3 - 50));
+            pathOne2.setDelay(Duration.millis(time_for_tile * 3 - 100));
             pathOne2.setPath(arc1);
             pathOne2.setNode(circle);
             pathOne2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -203,7 +203,7 @@ public class Main extends Application {
             pathOne2.setAutoReverse(false);
 
             pathOne3.setDuration(Duration.millis(time_for_tile * 3));
-            pathOne3.setDelay(Duration.millis(time_for_tile * 4 - 50));
+            pathOne3.setDelay(Duration.millis(time_for_tile * 4 - 150));
             pathOne3.setPath(line_path1_2);
             pathOne3.setNode(circle);
             pathOne3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -224,7 +224,7 @@ public class Main extends Application {
             pathTwo1.setAutoReverse(false);
 
             pathTwo2.setDuration(Duration.millis(time_for_tile));
-            pathTwo2.setDelay(Duration.millis(time_for_tile * 2 - 50));
+            pathTwo2.setDelay(Duration.millis(time_for_tile * 2 - 100));
             pathTwo2.setPath(arc2_1);
             pathTwo2.setNode(circle);
             pathTwo2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -232,7 +232,7 @@ public class Main extends Application {
             pathTwo2.setAutoReverse(false);
 
             pathTwo3.setDuration(Duration.millis(time_for_tile * 2));
-            pathTwo3.setDelay(Duration.millis(time_for_tile * 3 - 50));
+            pathTwo3.setDelay(Duration.millis(time_for_tile * 3 - 150));
             pathTwo3.setPath(line_path2_2);
             pathTwo3.setNode(circle);
             pathTwo3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -240,7 +240,7 @@ public class Main extends Application {
             pathTwo3.setAutoReverse(false);
 
             pathTwo4.setDuration(Duration.millis(time_for_tile));
-            pathTwo4.setDelay(Duration.millis(time_for_tile * 5 - 50));
+            pathTwo4.setDelay(Duration.millis(time_for_tile * 5 - 200));
             pathTwo4.setPath(arc2_2);
             pathTwo4.setNode(circle);
             pathTwo4.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -248,7 +248,7 @@ public class Main extends Application {
             pathTwo4.setAutoReverse(false);
 
             pathTwo5.setDuration(Duration.millis(time_for_tile));
-            pathTwo5.setDelay(Duration.millis(time_for_tile * 6 - 50));
+            pathTwo5.setDelay(Duration.millis(time_for_tile * 6 - 250));
             pathTwo5.setPath(line_path2_3);
             pathTwo5.setNode(circle);
             pathTwo5.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
