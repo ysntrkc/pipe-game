@@ -8,8 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polyline;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -18,7 +19,14 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Main extends Application {
-    PathTransition pathOne, pathTwo;
+    PathTransition pathOne1 = new PathTransition();
+    PathTransition pathOne2 = new PathTransition();
+    PathTransition pathOne3 = new PathTransition();
+    PathTransition pathTwo1 = new PathTransition();
+    PathTransition pathTwo2 = new PathTransition();
+    PathTransition pathTwo3 = new PathTransition();
+    PathTransition pathTwo4 = new PathTransition();
+    PathTransition pathTwo5 = new PathTransition();
 
     Tiles[] tiles_level1 = new Tiles[16];
     Tiles[] tiles_level2 = new Tiles[16];
@@ -171,34 +179,95 @@ public class Main extends Application {
     }
 
     public void path_maker(String level) {
-        circle = new Circle(48, 48, 15, Color.YELLOW);
+        circle = new Circle(48, 36, 15, Color.YELLOW);
+        int time_for_tile = 430;
 
         if (level.equals(level1) || level.equals(level2) || level.equals(level3)) {
-            Polyline path1 = new Polyline(48, 48, 48, 339, 339, 339);
-            pathOne = new PathTransition();
-            pathOne.setDuration(Duration.seconds(3));
-            pathOne.setPath(path1);
-            pathOne.setNode(circle);
-            pathOne.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-            pathOne.setCycleCount(1);
-            pathOne.setAutoReverse(false);
+            Line line_path1_1 = new Line(48, 36, 48, 292);
+            Arc arc1 = new Arc(97, 292, 48, 48, 180, 90);
+            Line line_path1_2 = new Line(97, 340, 346, 338 + 2);
+
+            pathOne1.setDuration(Duration.millis(time_for_tile * 3));
+            pathOne1.setPath(line_path1_1);
+            pathOne1.setNode(circle);
+            pathOne1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathOne1.setCycleCount(1);
+            pathOne1.setAutoReverse(false);
+
+            pathOne2.setDuration(Duration.millis(time_for_tile));
+            pathOne2.setDelay(Duration.millis(time_for_tile * 3 - 50));
+            pathOne2.setPath(arc1);
+            pathOne2.setNode(circle);
+            pathOne2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathOne2.setCycleCount(1);
+            pathOne2.setAutoReverse(false);
+
+            pathOne3.setDuration(Duration.millis(time_for_tile * 3));
+            pathOne3.setDelay(Duration.millis(time_for_tile * 4 - 50));
+            pathOne3.setPath(line_path1_2);
+            pathOne3.setNode(circle);
+            pathOne3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathOne3.setCycleCount(1);
+            pathOne3.setAutoReverse(false);
         } else if (level.equals(level4) || level.equals(level5)) {
-            Polyline path2 = new Polyline(48, 48, 48, 242, 339, 242, 339, 145);
-            pathTwo = new PathTransition();
-            pathTwo.setDuration(Duration.seconds(3));
-            pathTwo.setPath(path2);
-            pathTwo.setNode(circle);
-            pathTwo.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-            pathTwo.setCycleCount(1);
-            pathTwo.setAutoReverse(false);
+            Line line_path2_1 = new Line(48, 36, 48, 193);
+            Arc arc2_1 = new Arc(97, 193, 48, 48, 180, 90);
+            Line line_path2_2 = new Line(97, 241, 290, 241);
+            Arc arc2_2 = new Arc(292, 193, 48, 48, 270, 90);
+            Line line_path2_3 = new Line(340, 193, 340, 137);
+
+            pathTwo1.setDuration(Duration.millis(time_for_tile * 2));
+            pathTwo1.setPath(line_path2_1);
+            pathTwo1.setNode(circle);
+            pathTwo1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathTwo1.setCycleCount(1);
+            pathTwo1.setAutoReverse(false);
+
+            pathTwo2.setDuration(Duration.millis(time_for_tile));
+            pathTwo2.setDelay(Duration.millis(time_for_tile * 2 - 50));
+            pathTwo2.setPath(arc2_1);
+            pathTwo2.setNode(circle);
+            pathTwo2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathTwo2.setCycleCount(1);
+            pathTwo2.setAutoReverse(false);
+
+            pathTwo3.setDuration(Duration.millis(time_for_tile * 2));
+            pathTwo3.setDelay(Duration.millis(time_for_tile * 3 - 50));
+            pathTwo3.setPath(line_path2_2);
+            pathTwo3.setNode(circle);
+            pathTwo3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathTwo3.setCycleCount(1);
+            pathTwo3.setAutoReverse(false);
+
+            pathTwo4.setDuration(Duration.millis(time_for_tile));
+            pathTwo4.setDelay(Duration.millis(time_for_tile * 5 - 50));
+            pathTwo4.setPath(arc2_2);
+            pathTwo4.setNode(circle);
+            pathTwo4.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathTwo4.setCycleCount(1);
+            pathTwo4.setAutoReverse(false);
+
+            pathTwo5.setDuration(Duration.millis(time_for_tile));
+            pathTwo5.setDelay(Duration.millis(time_for_tile * 6 - 50));
+            pathTwo5.setPath(line_path2_3);
+            pathTwo5.setNode(circle);
+            pathTwo5.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+            pathTwo5.setCycleCount(1);
+            pathTwo5.setAutoReverse(false);
         }
     }
 
     public void animation_play(String level) {
         if (level.equals(level1) || level.equals(level2) || level.equals(level3)) {
-            pathOne.play();
+            pathOne1.play();
+            pathOne2.play();
+            pathOne3.play();
         } else if (level.equals(level4) || level.equals(level5)) {
-            pathTwo.play();
+            pathTwo1.play();
+            pathTwo2.play();
+            pathTwo3.play();
+            pathTwo4.play();
+            pathTwo5.play();
         }
     }
 
@@ -495,7 +564,6 @@ public class Main extends Application {
     }
 
     static class Tiles {
-        private boolean isStatic;
         private ImageView tile_image;
         private int tile_id;
         private String type;
@@ -505,8 +573,6 @@ public class Main extends Application {
             this.tile_id = tile_id;
             this.type = type;
             this.property = property;
-
-            this.isStatic = type.equals("PipeStatic") || type.equals("End") || type.equals("Starter");
 
             switch (type) {
                 case "Starter":
@@ -620,14 +686,6 @@ public class Main extends Application {
                 return tiles[cell_index + 4].getProperty().equals("Free");
             }
             return false;
-        }
-
-        public boolean isStatic() {
-            return isStatic;
-        }
-
-        public void setStatic(boolean aStatic) {
-            isStatic = aStatic;
         }
 
         public ImageView getTile_image() {
