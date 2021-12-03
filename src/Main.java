@@ -120,9 +120,9 @@ public class Main extends Application {
 
         start_pane.setStyle("-fx-background-color: #5e0000");
         start_pane.getChildren().addAll(start_button, credit_button, quit_button);
-        start_button.relocate(145.5,135);
-        credit_button.relocate(145.5,193);
-        quit_button.relocate(145.5,251);
+        start_button.relocate(145.5, 135);
+        credit_button.relocate(145.5, 193);
+        quit_button.relocate(145.5, 251);
 
         start_scene = new Scene(start_pane, 387, 434, Color.BLACK);
         scene = new Scene(borderPane, 387, 434, Color.BLACK);
@@ -190,10 +190,10 @@ public class Main extends Application {
         Pane credits_pane = new Pane(gridPaneForCredits, go_back_button);
         credits_pane.setStyle("-fx-background-color: #0ea582");
         gridPaneForCredits.relocate(10, 5);
-        go_back_button.relocate(145.5,325.5);
-        go_back_button.setPrefSize(96,48);
+        go_back_button.relocate(145.5, 325.5);
+        go_back_button.setPrefSize(96, 48);
         go_back_button.setOnAction(e -> window.setScene(start_scene));
-        Scene credits_scene = new Scene(credits_pane,387,434);
+        Scene credits_scene = new Scene(credits_pane, 387, 434);
         window.setScene(credits_scene);
     }
 
@@ -201,7 +201,7 @@ public class Main extends Application {
         int result = ConfirmBox.display("Exit", "Do you really want to close the game?");
         if (result == 1)
             window.close();
-        else if(result == 0)
+        else if (result == 0)
             window.setScene(start_scene);
     }
 
