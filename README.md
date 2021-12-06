@@ -1,6 +1,6 @@
 # Pipe Game
 
-* In order to run this game, you need to have install a JDK that contains JavaFX (For example: [Amazon Corretto 8](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html)).
+* In order to run this game, you need to have a JDK that contains JavaFX (For example: [Amazon Corretto 8](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html)).
 * If you just downloaded the JDK, you should add it as system variable. [Help](https://www.java.com/en/download/help/path.html)
 
 ## **Compile and Run:**
