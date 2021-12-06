@@ -1,3 +1,5 @@
+package src;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -49,7 +51,7 @@ public class ConfirmBox {
         pane.setBottom(hBoxForButtons);
 
         Scene scene = new Scene(pane);
-        window.getIcons().add(new Image("icons/exit_icon.png"));
+        window.getIcons().add(new Image("src/icons/exit_icon.png"));
         window.setResizable(false);
         window.setScene(scene);
         window.showAndWait();

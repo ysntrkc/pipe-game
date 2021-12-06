@@ -1,3 +1,5 @@
+package src;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -132,7 +134,7 @@ public class Main extends Application {
             closeProgram();
         });
 
-        window.getIcons().add(new Image("icons/window_icon.png"));
+        window.getIcons().add(new Image("src/icons/window_icon.png"));
         window.setTitle("Game");
         window.setScene(start_scene);
         window.setResizable(false);
@@ -337,11 +339,14 @@ public class Main extends Application {
     public void move_cell(int cell_index, GridPane gridPane, Tiles[] tiles) {
         tiles[cell_index].getTile_image().setOnMouseDragged(e -> {
             if (tiles[cell_index].getType().equals("Pipe")
-                    || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+                    || (tiles[cell_index].getType().equals("Empty")
+                            && tiles[cell_index].getProperty().equals("none"))) {
                 if (e.getX() - tiles[cell_index].getTile_image().getX() > 96 && can_move_right(cell_index, tiles)) {
                     if (!isWon(tiles)) {
-                        GridPane.setColumnIndex(tiles[cell_index + 1].getTile_image(), GridPane.getColumnIndex(tiles[cell_index + 1].getTile_image()) - 1);
-                        GridPane.setColumnIndex(tiles[cell_index].getTile_image(), GridPane.getColumnIndex(tiles[cell_index].getTile_image()) + 1);
+                        GridPane.setColumnIndex(tiles[cell_index + 1].getTile_image(),
+                                GridPane.getColumnIndex(tiles[cell_index + 1].getTile_image()) - 1);
+                        GridPane.setColumnIndex(tiles[cell_index].getTile_image(),
+                                GridPane.getColumnIndex(tiles[cell_index].getTile_image()) + 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index + 1];
@@ -350,10 +355,13 @@ public class Main extends Application {
                         tiles[cell_index + 1] = current;
                         step_controller(cell_index, tiles, next);
                     }
-                } else if (e.getX() - tiles[cell_index].getTile_image().getX() < 0 && can_move_left(cell_index, tiles)) {
+                } else if (e.getX() - tiles[cell_index].getTile_image().getX() < 0
+                        && can_move_left(cell_index, tiles)) {
                     if (!isWon(tiles)) {
-                        GridPane.setColumnIndex(tiles[cell_index - 1].getTile_image(), GridPane.getColumnIndex(tiles[cell_index - 1].getTile_image()) + 1);
-                        GridPane.setColumnIndex(tiles[cell_index].getTile_image(), GridPane.getColumnIndex(tiles[cell_index].getTile_image()) - 1);
+                        GridPane.setColumnIndex(tiles[cell_index - 1].getTile_image(),
+                                GridPane.getColumnIndex(tiles[cell_index - 1].getTile_image()) + 1);
+                        GridPane.setColumnIndex(tiles[cell_index].getTile_image(),
+                                GridPane.getColumnIndex(tiles[cell_index].getTile_image()) - 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index - 1];
@@ -362,10 +370,13 @@ public class Main extends Application {
                         tiles[cell_index - 1] = current;
                         step_controller(cell_index, tiles, next);
                     }
-                } else if (e.getY() - tiles[cell_index].getTile_image().getY() > 96 && can_move_down(cell_index, tiles)) {
+                } else if (e.getY() - tiles[cell_index].getTile_image().getY() > 96
+                        && can_move_down(cell_index, tiles)) {
                     if (!isWon(tiles)) {
-                        GridPane.setRowIndex(tiles[cell_index + 4].getTile_image(), GridPane.getRowIndex(tiles[cell_index + 4].getTile_image()) - 1);
-                        GridPane.setRowIndex(tiles[cell_index].getTile_image(), GridPane.getRowIndex(tiles[cell_index].getTile_image()) + 1);
+                        GridPane.setRowIndex(tiles[cell_index + 4].getTile_image(),
+                                GridPane.getRowIndex(tiles[cell_index + 4].getTile_image()) - 1);
+                        GridPane.setRowIndex(tiles[cell_index].getTile_image(),
+                                GridPane.getRowIndex(tiles[cell_index].getTile_image()) + 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index + 4];
@@ -376,8 +387,10 @@ public class Main extends Application {
                     }
                 } else if (e.getY() - tiles[cell_index].getTile_image().getY() < 0 && can_move_up(cell_index, tiles)) {
                     if (!isWon(tiles)) {
-                        GridPane.setRowIndex(tiles[cell_index - 4].getTile_image(), GridPane.getRowIndex(tiles[cell_index - 4].getTile_image()) + 1);
-                        GridPane.setRowIndex(tiles[cell_index].getTile_image(), GridPane.getRowIndex(tiles[cell_index].getTile_image()) - 1);
+                        GridPane.setRowIndex(tiles[cell_index - 4].getTile_image(),
+                                GridPane.getRowIndex(tiles[cell_index - 4].getTile_image()) + 1);
+                        GridPane.setRowIndex(tiles[cell_index].getTile_image(),
+                                GridPane.getRowIndex(tiles[cell_index].getTile_image()) - 1);
 
                         Tiles current = tiles[cell_index];
                         Tiles next = tiles[cell_index - 4];
@@ -512,7 +525,8 @@ public class Main extends Application {
             int tile_index = i + 4 * j;
 
             System.out.println("\nTile index: " + tile_index);
-            System.out.println(tiles[tile_index].getTile_id() + ":" + tiles[tile_index].getType() + ":" + tiles[tile_index].getProperty());
+            System.out.println(tiles[tile_index].getTile_id() + ":" + tiles[tile_index].getType() + ":"
+                    + tiles[tile_index].getProperty());
 
             move_cell(tile_index, gridMap, tiles);
         });
@@ -612,7 +626,8 @@ public class Main extends Application {
     public boolean can_move_right(int cell_index, Tiles[] tiles) {
         if (cell_index == 3 || cell_index == 7 || cell_index == 11 || cell_index == 15) {
             return false;
-        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+        } else if (tiles[cell_index].getType().equals("Pipe")
+                || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
             return tiles[cell_index + 1].getProperty().equals("Free");
         }
         return false;
@@ -621,7 +636,8 @@ public class Main extends Application {
     public boolean can_move_left(int cell_index, Tiles[] tiles) {
         if (cell_index == 0 || cell_index == 4 || cell_index == 8 || cell_index == 12) {
             return false;
-        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+        } else if (tiles[cell_index].getType().equals("Pipe")
+                || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
             return tiles[cell_index - 1].getProperty().equals("Free");
         }
         return false;
@@ -630,7 +646,8 @@ public class Main extends Application {
     public boolean can_move_up(int cell_index, Tiles[] tiles) {
         if (cell_index == 0 || cell_index == 1 || cell_index == 2 || cell_index == 3) {
             return false;
-        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+        } else if (tiles[cell_index].getType().equals("Pipe")
+                || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
             return tiles[cell_index - 4].getProperty().equals("Free");
         }
         return false;
@@ -639,7 +656,8 @@ public class Main extends Application {
     public boolean can_move_down(int cell_index, Tiles[] tiles) {
         if (cell_index == 12 || cell_index == 13 || cell_index == 14 || cell_index == 15) {
             return false;
-        } else if (tiles[cell_index].getType().equals("Pipe") || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
+        } else if (tiles[cell_index].getType().equals("Pipe")
+                || (tiles[cell_index].getType().equals("Empty") && tiles[cell_index].getProperty().equals("none"))) {
             return tiles[cell_index + 4].getProperty().equals("Free");
         }
         return false;
